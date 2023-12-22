@@ -1,0 +1,1 @@
+export const _BasicErrMsg = 'Sorry; There was a problem in your connection. please try again after a while.';

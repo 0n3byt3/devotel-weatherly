@@ -14,7 +14,13 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      //shared code
+      "@shared/*": ["./src/shared/*"],
+      "@shared": ["./src/shared"],
+      //client(frontend) code
+      "@client/*": ["./src/client/*"],
+
+      "@/*": ["./src/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
