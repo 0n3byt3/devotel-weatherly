@@ -4,7 +4,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 //external types dependencies
 //internal dependencies
 import { apiErrToast, $api } from './api';
-import { mainSlice } from '@client/comp';
+import { mainSlice } from '@client/comp/main/main.slic';
 //internal types dependencies
 
 export const createStore = (

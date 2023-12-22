@@ -8,7 +8,7 @@ import type { FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { $log } from '@shared/util';
 import { handleReqErr } from '@client/util';
 //project types imports
-import type { RootState } from '../store';
+//import type { RootState } from '../store';
 
 type TClientErrorRes = FetchBaseQueryError & {
   noToast?: boolean;
@@ -41,15 +41,7 @@ export const apiErrToast: Middleware = (api: MiddlewareAPI) => (next) => (action
 const baseQuery = retry(
   async (args: string | FetchArgs, api, extraOptions) => {
     const result = await fetchBaseQuery({
-      baseUrl: process.env.NEXT_PUBLIC_REACT_APP_API_SERVER_URL, //should end with '/' (slash)
-      prepareHeaders: (headers, { getState }) => {
-        // By default, if we have a token in the store, let's use that for authenticated requests
-        const token = (getState() as RootState).auth.token?.access;
-        if (token) {
-          headers.set('Authorization', `Bearer ${token}`);
-        }
-        return headers;
-      },
+      //baseUrl: process.env.NEXT_PUBLIC_REACT_APP_API_SERVER_URL, //should end with '/' (slash),
     })(
       args,
       api,
@@ -83,7 +75,7 @@ export const $api = createApi({
      * for any tags that would be provided by injected endpoints
      */
     tagTypes: [
-      'Auth',
+      'Main',
     ],
     /**
      * This api has endpoints injected in adjacent files,

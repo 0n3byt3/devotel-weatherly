@@ -1,4 +1,4 @@
-import '@/styles/globals.scss'
+import '@client/styles/globals.scss'
 //external dependencies
 import { Nunito_Sans } from "next/font/google";
 import { Provider } from 'react-redux';

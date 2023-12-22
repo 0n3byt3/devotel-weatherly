@@ -1,4 +1,4 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily, colors } = require('tailwindcss/defaultTheme');
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -29,9 +29,13 @@ const config: Config = {
         error: {
           DEFAULT: '#DE350B',
         },
-        body: {
+        dark: {
           '1': '#0b131e',
         },
+        gray: {
+          '1': '#ececef',
+          ...colors.gray
+        }
       },
     },
   },

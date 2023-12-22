@@ -1,5 +1,5 @@
 //external dependencies
-import { MainView } from "@client/comp";
+import { MainView } from "@client/comp/main/main";
 //external types dependencies
 //internal dependencies
 //internal types dependencies
