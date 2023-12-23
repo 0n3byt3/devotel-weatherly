@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-nunito-sans)', ...fontFamily.sans],
+        sans: ['var(--font-nunito)', ...fontFamily.sans],
       },
       colors: {
         transparent: 'transparent',

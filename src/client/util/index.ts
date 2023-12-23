@@ -4,7 +4,7 @@ import _ from 'lodash'
 //package types imports
 import type { Dispatch, SetStateAction, ChangeEvent } from "react"
 //porject imports
-import { toast } from "@client/comp";
+import { toast } from "@client/comp/core";
 import { _BasicErrMsg } from "@shared/const";
 import { $log, SchemaValidationError } from "@shared/util";
 //project types imports

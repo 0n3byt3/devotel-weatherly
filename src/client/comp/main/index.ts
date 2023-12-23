@@ -1,4 +1,5 @@
 export * from './main.schm'
 export * from './main.slic'
+export * from './main.hook'
 export * from './main.api'
 export * from './main'

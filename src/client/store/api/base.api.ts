@@ -41,7 +41,7 @@ export const apiErrToast: Middleware = (api: MiddlewareAPI) => (next) => (action
 const baseQuery = retry(
   async (args: string | FetchArgs, api, extraOptions) => {
     const result = await fetchBaseQuery({
-      //baseUrl: process.env.NEXT_PUBLIC_REACT_APP_API_SERVER_URL, //should end with '/' (slash),
+      baseUrl: process.env.NEXT_PUBLIC_WEATHER_API_SERVER_URL, //should end with '/' (slash),
     })(
       args,
       api,
@@ -50,7 +50,7 @@ const baseQuery = retry(
 
     // bail out of re-tries immediately if unauthorized, Unprocessable Content, ...
     // because we know successive re-retries would be redundant
-    if (result.error?.status === 400 || result.error?.status === 401 || result.error?.status === 422) {
+    if (result.error?.status === 400 || result.error?.status === 401 || result.error?.status === 403 || result.error?.status === 422) {
       retry.fail(result.error);
     }
 
