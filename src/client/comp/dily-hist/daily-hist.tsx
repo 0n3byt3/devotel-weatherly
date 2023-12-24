@@ -3,7 +3,7 @@ import { memo, useCallback, useState } from "react";
 //external types dependencies
 import type { ChangeEvent, FormEvent } from "react";
 //internal dependencies
-import { useLocation } from "@client/comp/main";
+import { useLocation, useMock } from "@client/comp/main";
 import { $log } from "@shared/util";
 import { FA } from "@client/comp/core";
 import {
@@ -14,15 +14,16 @@ import { _FakeDailyHist } from "./daily-hist.mock";
 import type { THistDay } from ".";
 
 export const DailyHist = memo(() => {
+  const mock = useMock();
   const loc = useLocation();
   const [days, setDays] = useState<THistDay[]>([]);
   const [getDailyHist, { isLoading }] = useGetDailyHistMutation();
   const [start, setStart] = useState(
     formatDate(new Date(new Date().setDate(new Date().getDate() - 2)))
-  );
+  );//start date => 2days before current date with yyyy-mm-dd format
   const [end, setEnd] = useState(
     formatDate(new Date(new Date().setDate(new Date().getDate() - 1)))
-  );
+  );//end date => 1day before current date with yyyy-mm-dd format
 
   const onStartDate = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setStart(e.target.value);
@@ -35,8 +36,7 @@ export const DailyHist = memo(() => {
     e.preventDefault();
     const init = async () => {
       try {
-        const res = await getDailyHist({...loc, start, end}).unwrap();
-        //const res = _FakeDailyHist;
+        const res = mock? _FakeDailyHist : await getDailyHist({...loc, start, end}).unwrap();
         if (res?.data?.length) setDays(res.data);
         $log("daily history:", res);
       } catch (err) {

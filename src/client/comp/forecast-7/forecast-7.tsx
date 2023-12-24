@@ -7,11 +7,12 @@ import { WeatherIcon } from "@client/comp/shared";
 import { $log } from "@shared/util";
 import { _FakeForecast7 } from "./forecast-7.mock";
 import { useGetForecast7Mutation } from ".";
-import { useLocation } from "@client/comp/main";
+import { useLocation, useMock } from "@client/comp/main";
 //internal types dependencies
 import type { TDayForecast } from ".";
 
 export const Forecast7 = memo(() => {
+  const mock = useMock();
   const loc = useLocation();
   const [expand, toggExpand] = useReducer((s) => !s, false);
   const [days, setDays] = useState<TDayForecast[]>([]);
@@ -20,8 +21,7 @@ export const Forecast7 = memo(() => {
   useEffect(() => {
     const init = async () => {
       try {
-        const res = await getForecast7(loc).unwrap();
-        //const res = _FakeForecast7;
+        const res = mock? _FakeForecast7 : await getForecast7(loc).unwrap();
         if (res?.data?.length) setDays(res.data);
         $log("7 days forecast:", res);
       } catch (err) {
@@ -36,10 +36,13 @@ export const Forecast7 = memo(() => {
   return (
     <div className="w-full bg-slate-700/70 px-3 pt-2 pb-4 rounded-lg transition-all ease-linear">
       <div
-        className="py-2 px-1 flex flex-row items-center justify-between cursor-pointer"
+        className="w-full py-2 px-1 flex flex-row items-center justify-between cursor-pointer"
         onClick={toggExpand}
       >
-        <span className="font-light">7-Day Forecast</span>
+        <div className="flex flex-row items-center gap-1">
+          <FA icon="temperature-quarter"/>
+          <span className="font-light">7-Day Forecast</span>
+        </div>
         <FA
           className={`transition-transform ease-linear ${
             expand ? "rotate-180" : ""
@@ -82,9 +85,17 @@ const ForecastDay = memo(
         </div>
         <div className="flex flex-col items-center">
           <div className="flex items-center justify-center relative gap-1">
-            <FA icon="temperature-low" />
+            <FA icon="temperature-arrow-down" />
+            <span className="text-sm">min:</span>
             <span className="text-[1rem] font-black whitespace-nowrap">
-              {(min_temp || "N/A") + " / " + (max_temp || "N/A")}
+              {min_temp || "N/A"}
+            </span>
+          </div>
+          <div className="flex items-center justify-center relative gap-1">
+            <FA icon="temperature-arrow-up" />
+            <span className="text-sm">max:</span>
+            <span className="text-[1rem] font-black whitespace-nowrap">
+              {max_temp || "N/A"}
             </span>
           </div>
           <span className="text-md opacity-80">

@@ -11,3 +11,10 @@ export const useLocation = () => {
 
   return useMemo(() => state, [state]);
 };
+
+/**use mock data hook */
+export const useMock = () => {
+  const state = useTypedSelector((state) => state.main.mock);
+
+  return useMemo(() => state, [state]);
+};
