@@ -44,3 +44,5 @@ export const useOnInputChange = <T extends object>(setObjState: Dispatch<SetStat
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
+
+export * from './c2f.utl'

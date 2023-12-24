@@ -14,7 +14,7 @@ export const $currWeatherApi = $api.injectEndpoints({
     getCurrWeather: build.mutation<TGetCurrWeatherRes, TGetCurrWeatherReq>({
       query(data) {
         return {
-          url: `current?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&lat=${data.lat}&lon=${data.lon}`,
+          url: `current?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&lat=${data.lat}&lon=${data.lon}&units=${data.units}`,
           method: "GET",
         };
       },

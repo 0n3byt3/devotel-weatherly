@@ -39,8 +39,9 @@ const BaseCurrWeatherSchm = z.object({
 export type TCurrWeather = z.infer<typeof BaseCurrWeatherSchm>;
 
 export type TGetCurrWeatherReq = {
-  lat: number,
-  lon: number,
+  lat: number;
+  lon: number;
+  units: 'M' | 'I';
 };
 export type TGetCurrWeatherRes = {
   count?: number,

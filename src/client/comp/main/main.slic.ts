@@ -6,7 +6,8 @@ import type {PayloadAction} from "@reduxjs/toolkit";
 //internal types dependencies
 
 interface MainState {
-  mock: boolean, //using mock data
+  mock: boolean; //using mock data
+  unit: 'c' | 'f';
   location: undefined | {
     lat: number,
     lon: number
@@ -15,6 +16,7 @@ interface MainState {
 
 const initialState: MainState = {
   mock: false,
+  unit: 'c',
   location: undefined,
 }
 export const mainSlice = createSlice({
@@ -28,9 +30,17 @@ export const mainSlice = createSlice({
     ) => {
       state.location = payload;
     },
+    //sets temp unit
+    setUnit: (
+      state, 
+      {payload}: PayloadAction<MainState['unit']>
+    ) => {
+      state.unit = payload;
+    },
   }
 });
 
 export const {
   setLocation,
+  setUnit,
 } = mainSlice.actions;
